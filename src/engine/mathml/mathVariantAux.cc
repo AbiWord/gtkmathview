@@ -19,6 +19,7 @@
 #include <config.h>
 
 #include <cassert>
+#include <cstring>
 
 #include "mathVariantAux.hh"
 

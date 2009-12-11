@@ -19,7 +19,7 @@
 #include <t1lib.h>
 #include <config.h>
 #include <map>
-#include <string>
+#include <cstring>
 #include <stdlib.h>
 #include <iostream>
 #include <list>

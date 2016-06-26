@@ -37,7 +37,7 @@ public:
     unsigned char face;
     const char* codingScheme;
     int designSize;
-    int checksum;
+    unsigned int checksum;
     unsigned int nDimensions;
     unsigned int nCharacters;
   };
@@ -52,7 +52,7 @@ public:
   struct Kerning
   {
     UChar8 index;
-    int value;
+    unsigned int value;
   };
 
   struct Ligature
@@ -67,7 +67,7 @@ public:
     UChar8 index;
     int width;
     int height;
-    int depth;
+    unsigned int depth;
     int italicCorrection;
     unsigned char nKernings;
     const Kerning* kerning;

@@ -29,7 +29,7 @@
 #include "ShapingContext.hh"
 
 struct GlyphMap {
-  Char8 index;
+  UChar8 index;
   Char16 ch;
 };
 

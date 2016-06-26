@@ -291,7 +291,7 @@ View::getCharAt(const scaled& x, const scaled& y, CharIndex& index, Point* charO
 	  }
     }
 
-  return false;
+  return SmartPtr<Element>();
 }
 
 bool

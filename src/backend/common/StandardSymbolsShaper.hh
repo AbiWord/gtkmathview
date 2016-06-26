@@ -32,20 +32,20 @@ public:
   struct HStretchyChar
   {
     Char16 ch;
-    Char8 normal;
-    Char8 left;
-    Char8 glue;
-    Char8 right;
+    UChar8 normal;
+    UChar8 left;
+    UChar8 glue;
+    UChar8 right;
   };
   
   struct VStretchyChar
   {
     Char16 ch;
-    Char8 normal;
-    Char8 top;
-    Char8 glue;
-    Char8 middle;
-    Char8 bottom;
+    UChar8 normal;
+    UChar8 top;
+    UChar8 glue;
+    UChar8 middle;
+    UChar8 bottom;
   };
 
 protected:

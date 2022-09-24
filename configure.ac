@@ -21,6 +21,13 @@ AC_SUBST(MATHVIEW_VERSION_INFO)
 AREAMODEL_VERSION_INFO=$MATHVIEW_VERSION_INFO
 AC_SUBST(AREAMODEL_VERSION_INFO)
 
+
+dnl Automake configuration
+AM_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(gtkmathview, $MATHVIEW_VERSION)
+AC_LIBTOOL_WIN32_DLL
+AM_PROG_LIBTOOL
+
 AC_ARG_ENABLE(
 	builder-cache,
 	[  --enable-builder-cache[=ARG] enable the cache for MathML text nodes [default=no]],
@@ -180,12 +187,6 @@ AC_ARG_WITH(
 	with_popt=$withval,
 	with_popt="auto"
 )
-
-dnl Automake configuration
-AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gtkmathview, $MATHVIEW_VERSION)
-AC_LIBTOOL_WIN32_DLL
-AM_PROG_LIBTOOL
 
 dnl config.h top and bottom
 AH_TOP([

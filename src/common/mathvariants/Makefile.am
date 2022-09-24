@@ -27,7 +27,9 @@ CLEANFILES = $(AUTO_CC)
 
 noinst_LTLIBRARIES = libmathvariants.la
 
-libmathvariants_la_CPPFLAGS = -DGMV_MathView_DLL
+libmathvariants_la_CPPFLAGS = -DGMV_MathView_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common
 libmathvariants_la_SOURCES = \
   $(AUTO_CC) \
   MathVariantMap.cc \
@@ -38,10 +40,6 @@ mathview_HEADERS = \
   MathVariant.hh \
   MathVariantMap.hh \
   $(NULL)
-
-INCLUDES = \
-  -I$(top_builddir)/auto \
-  -I$(top_srcdir)/src/common
 
 if COND_XSLTPROC
 XSLTPROC = xsltproc

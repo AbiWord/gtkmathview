@@ -3,7 +3,15 @@ NULL =
 
 noinst_LTLIBRARIES = libboxml.la
 
-libboxml_la_CPPFLAGS = -DGMV_MathView_DLL
+libboxml_la_CPPFLAGS = -DGMV_MathView_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/backend/common \
+  $(NULL)
+
 libboxml_la_SOURCES = \
   BoxML.hh \
   BoxMLActionElement.cc \
@@ -48,13 +56,3 @@ mathview_HEADERS = \
   BoxMLNamespaceContext.hh \
   BoxMLElement.hh \
   $(NULL)
-
-INCLUDES = \
-  -I$(top_builddir)/auto \
-  -I$(top_srcdir)/auto \
-  -I$(top_srcdir)/src/common \
-  -I$(top_srcdir)/src/common/mathvariants \
-  -I$(top_srcdir)/src/engine/common \
-  -I$(top_srcdir)/src/backend/common \
-  $(NULL)
-

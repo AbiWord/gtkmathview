@@ -56,10 +56,74 @@ libmathview_frontend_gmetadom_la_LIBADD = \
   -lstdc++ \
   $(NULL)
 
-libmathview_frontend_custom_reader_la_CPPFLAGS = -DGMV_FrontEnd_DLL
-libmathview_frontend_libxml2_reader_la_CPPFLAGS = -DGMV_FrontEnd_DLL
-libmathview_frontend_libxml2_la_CPPFLAGS = -DGMV_FrontEnd_DLL
-libmathview_frontend_gmetadom_la_CPPFLAGS = -DGMV_FrontEnd_DLL
+libmathview_frontend_custom_reader_la_CPPFLAGS = -DGMV_FrontEnd_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/frontend/common \
+  -I$(top_srcdir)/src/frontend/custom_reader \
+  -I$(top_srcdir)/src/frontend/libxml2_reader \
+  -I$(top_srcdir)/src/frontend/libxml2 \
+  -I$(top_srcdir)/src/frontend/gmetadom \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  -I$(top_srcdir)/src/backend/common \
+  $(XML_CFLAGS) \
+  $(DOM_CFLAGS) \
+  $(NULL)
+
+libmathview_frontend_libxml2_reader_la_CPPFLAGS = -DGMV_FrontEnd_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/frontend/common \
+  -I$(top_srcdir)/src/frontend/custom_reader \
+  -I$(top_srcdir)/src/frontend/libxml2_reader \
+  -I$(top_srcdir)/src/frontend/libxml2 \
+  -I$(top_srcdir)/src/frontend/gmetadom \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  -I$(top_srcdir)/src/backend/common \
+  $(XML_CFLAGS) \
+  $(DOM_CFLAGS) \
+  $(NULL)
+
+libmathview_frontend_libxml2_la_CPPFLAGS = -DGMV_FrontEnd_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/frontend/common \
+  -I$(top_srcdir)/src/frontend/custom_reader \
+  -I$(top_srcdir)/src/frontend/libxml2_reader \
+  -I$(top_srcdir)/src/frontend/libxml2 \
+  -I$(top_srcdir)/src/frontend/gmetadom \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  -I$(top_srcdir)/src/backend/common \
+  $(XML_CFLAGS) \
+  $(DOM_CFLAGS) \
+  $(NULL)
+
+libmathview_frontend_gmetadom_la_CPPFLAGS = -DGMV_FrontEnd_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/frontend/common \
+  -I$(top_srcdir)/src/frontend/custom_reader \
+  -I$(top_srcdir)/src/frontend/libxml2_reader \
+  -I$(top_srcdir)/src/frontend/libxml2 \
+  -I$(top_srcdir)/src/frontend/gmetadom \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  -I$(top_srcdir)/src/backend/common \
+  $(XML_CFLAGS) \
+  $(DOM_CFLAGS) \
+  $(NULL)
+
 
 libmathview_frontend_custom_reader_la_LDFLAGS = -version-info @MATHVIEW_VERSION_INFO@ -no-undefined
 libmathview_frontend_libxml2_reader_la_LDFLAGS = -version-info @MATHVIEW_VERSION_INFO@ -no-undefined
@@ -78,21 +142,4 @@ mathview_HEADERS = \
   libxml2_reader_MathView.hh \
   libxml2_MathView.hh \
   gmetadom_MathView.hh \
-  $(NULL)
-
-INCLUDES = \
-  -I$(top_builddir)/auto \
-  -I$(top_srcdir)/src/common \
-  -I$(top_srcdir)/src/common/mathvariants \
-  -I$(top_srcdir)/src/frontend/common \
-  -I$(top_srcdir)/src/frontend/custom_reader \
-  -I$(top_srcdir)/src/frontend/libxml2_reader \
-  -I$(top_srcdir)/src/frontend/libxml2 \
-  -I$(top_srcdir)/src/frontend/gmetadom \
-  -I$(top_srcdir)/src/engine/common \
-  -I$(top_srcdir)/src/engine/mathml \
-  -I$(top_srcdir)/src/engine/boxml \
-  -I$(top_srcdir)/src/backend/common \
-  $(XML_CFLAGS) \
-  $(DOM_CFLAGS) \
   $(NULL)

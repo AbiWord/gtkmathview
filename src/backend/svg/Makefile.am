@@ -28,7 +28,17 @@ MAYBE_TFM_S = $(NULL)
 MAYBE_TFM_H = $(NULL)
 endif
 
-libmathview_backend_svg_la_CPPFLAGS = -DGMV_BackEnd_DLL
+libmathview_backend_svg_la_CPPFLAGS = -DGMV_BackEnd_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  -I$(top_srcdir)/src/backend/common \
+  -I$(top_srcdir)/src/backend/common/tfm \
+  $(NULL)
+
 libmathview_backend_svg_la_LDFLAGS = -version-info @MATHVIEW_VERSION_INFO@
 
 libmathview_backend_svg_la_SOURCES = \
@@ -61,15 +71,4 @@ mathview_HEADERS = \
   SVG_Backend.hh \
   SVG_RenderingContext.hh \
   SVG_StreamRenderingContext.hh \
-  $(NULL)
-
-INCLUDES = \
-  -I$(top_builddir)/auto \
-  -I$(top_srcdir)/src/common \
-  -I$(top_srcdir)/src/common/mathvariants \
-  -I$(top_srcdir)/src/engine/common \
-  -I$(top_srcdir)/src/engine/mathml \
-  -I$(top_srcdir)/src/engine/boxml \
-  -I$(top_srcdir)/src/backend/common \
-  -I$(top_srcdir)/src/backend/common/tfm \
   $(NULL)

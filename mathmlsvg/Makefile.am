@@ -34,7 +34,7 @@ mathmlsvg_LDADD = \
   -lxml2 \
   $(NULL)
 
-INCLUDES = \
+AM_CPPFLAGS = \
   -I$(top_builddir)/auto \
   -I$(top_srcdir)/auto \
   -I$(top_srcdir)/src/common \

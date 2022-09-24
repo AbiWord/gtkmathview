@@ -25,7 +25,19 @@ MAYBE_T1_S = $(NULL)
 MAYBE_T1_H = $(NULL)
 endif
 
-libmathview_backend_gtk_la_CPPFLAGS = -DGMV_BackEnd_DLL
+libmathview_backend_gtk_la_CPPFLAGS = -DGMV_BackEnd_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  -I$(top_srcdir)/src/backend/common \
+  $(PANGOX_CFLAGS) \
+  $(GTK_CFLAGS) \
+  $(T1_CFLAGS) \
+  $(NULL)
+
 libmathview_backend_gtk_la_LDFLAGS = -version-info @MATHVIEW_VERSION_INFO@
 
 libmathview_backend_gtk_la_SOURCES = \
@@ -80,17 +92,4 @@ libmathview_backend_gtk_la_LIBADD = \
   $(GTK_LIBS) \
   $(T1_LIBS) \
   $(T1_LIBS_X) \
-  $(NULL)
-
-INCLUDES = \
-  -I$(top_builddir)/auto \
-  -I$(top_srcdir)/src/common \
-  -I$(top_srcdir)/src/common/mathvariants \
-  -I$(top_srcdir)/src/engine/common \
-  -I$(top_srcdir)/src/engine/mathml \
-  -I$(top_srcdir)/src/engine/boxml \
-  -I$(top_srcdir)/src/backend/common \
-  $(PANGOX_CFLAGS) \
-  $(GTK_CFLAGS) \
-  $(T1_CFLAGS) \
   $(NULL)

@@ -98,7 +98,11 @@ noinst_LTLIBRARIES = libtfm.la
 
 BUILT_SOURCES = $(AUTO_CC)
 
-libtfm_la_CPPFLAGS = -DGMV_MathView_DLL
+libtfm_la_CPPFLAGS = -DGMV_MathView_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common \
+  $(NULL)
+
 libtfm_la_SOURCES = \
   $(AUTO_CC) \
   TFM.hh \
@@ -135,8 +139,3 @@ LICENSE = $(top_srcdir)/doc/LICENSE.cc
 xtfms: $(XTFMS)
 
 endif
-
-INCLUDES = \
-  -I$(top_builddir)/auto \
-  -I$(top_srcdir)/src/common \
-  $(NULL)

@@ -1,6 +1,8 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT
+dnl Automake configuration
+AC_INIT([gtkmathview],[0.8.0])
+AM_INIT_AUTOMAKE([no-dist-gzip dist-bzip2 dist-xz])
 AC_CONFIG_SRCDIR([src/common/Clock.hh])
 
 MATHVIEW_MAJOR_VERSION=0
@@ -21,12 +23,9 @@ AC_SUBST(MATHVIEW_VERSION_INFO)
 AREAMODEL_VERSION_INFO=$MATHVIEW_VERSION_INFO
 AC_SUBST(AREAMODEL_VERSION_INFO)
 
+AC_CONFIG_HEADERS(config.h)
 
-dnl Automake configuration
-AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gtkmathview, $MATHVIEW_VERSION)
-AC_LIBTOOL_WIN32_DLL
-AM_PROG_LIBTOOL
+LT_INIT
 
 AC_ARG_ENABLE(
 	builder-cache,
@@ -223,10 +222,10 @@ dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_LN_S
-AC_ISC_POSIX
+AC_SEARCH_LIBS([strerror],[cposix])
 
 dnl Checks for header files.
-AC_HEADER_STDC
+
 AC_CHECK_HEADERS(unistd.h)
 
 dnl Checks for typedefs, structures, and compiler characteristics.
@@ -275,22 +274,18 @@ AC_CHECK_HEADERS(ext/hash_map,
 AC_SUBST(GMV_HAVE_EXT_HASH_MAP_CFLAGS)
 
 AC_MSG_CHECKING([whether the C++ compiler supports the standard character traits])
-AC_TRY_LINK(
-	[#include <string>],
-	[
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <string>]], [[
 		std::basic_string<char> s1;
 		std::basic_string<wchar_t> s2;
 		std::basic_string<wchar_t> s3;
 		s2 = s3;
-	],
-	[
+	]])],[
 		AC_DEFINE(STD_TRAITS,1,[Define to 1 if standard traits for char and wchar_t are provided])
 		AC_MSG_RESULT(yes)
-	],
-	[
+	],[
 		AC_MSG_RESULT(no)
-	]
-)
+
+])
 
 AC_LANG_POP(C++)
 
@@ -533,7 +528,7 @@ AC_CONFIG_FILES([
 ])
 AC_OUTPUT
 
-cat <<EOF
+echo "
 
 GtkMathView ${MATHVIEW_VERSION}
 
@@ -569,4 +564,4 @@ Performance
 
   Builder cache       ${enable_builder_cache}
 
-EOF
+"

@@ -3,7 +3,15 @@ NULL =
 
 noinst_LTLIBRARIES = libfrontend_common.la
 
-libfrontend_common_la_CPPFLAGS = -DGMV_MathView_DLL
+libfrontend_common_la_CPPFLAGS = -DGMV_MathView_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  -I$(top_srcdir)/src/backend/common \
+  $(NULL)
+
 libfrontend_common_la_SOURCES = \
   Builder.cc \
   $(NULL)
@@ -28,13 +36,3 @@ mathview_HEADERS = \
   TemplateElementValidator.hh \
   TemplateElementIterator.hh \
   $(NULL)
-
-INCLUDES = \
-  -I$(top_builddir)/auto \
-  -I$(top_srcdir)/src/common \
-  -I$(top_srcdir)/src/engine/common \
-  -I$(top_srcdir)/src/engine/mathml \
-  -I$(top_srcdir)/src/engine/boxml \
-  -I$(top_srcdir)/src/backend/common \
-  $(NULL)
-

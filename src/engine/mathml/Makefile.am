@@ -3,7 +3,16 @@ NULL =
 
 noinst_LTLIBRARIES = libmathml.la
 
-libmathml_la_CPPFLAGS = -DGMV_MathView_DLL
+libmathml_la_CPPFLAGS = -DGMV_MathView_DLL \
+  -I$(top_srcdir)/auto \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants/ \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/frontend/common \
+  -I$(top_srcdir)/src/backend/common \
+  $(NULL)
+
 libmathml_la_SOURCES = \
   MathMLActionElement.cc \
   MathMLAlignGroupElement.cc \
@@ -111,14 +120,3 @@ noinst_HEADERS = \
   mathVariantAux.hh \
   traverseAux.hh \
   $(NULL)
-
-INCLUDES = \
-  -I$(top_srcdir)/auto \
-  -I$(top_builddir)/auto \
-  -I$(top_srcdir)/src/common \
-  -I$(top_srcdir)/src/common/mathvariants/ \
-  -I$(top_srcdir)/src/engine/common \
-  -I$(top_srcdir)/src/frontend/common \
-  -I$(top_srcdir)/src/backend/common \
-  $(NULL)
-

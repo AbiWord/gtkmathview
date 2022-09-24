@@ -80,7 +80,7 @@ Char.hh: $(top_builddir)/auto/Char.hh.in
 	fi \
 	)
 
-INCLUDES = \
+AM_CPPFLAGS = \
   -I$(top_srcdir)/src/common \
   -I$(top_srcdir)/src/frontend/gmetadom \
   -I$(top_builddir) \

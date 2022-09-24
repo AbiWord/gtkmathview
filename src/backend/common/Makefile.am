@@ -76,7 +76,17 @@ MAYBE_T1LIB_H = $(NULL)
 MAYBE_T1LIB_L = $(NULL)
 endif
 
-libbackend_common_la_CPPFLAGS = -DGMV_MathView_DLL
+libbackend_common_la_CPPFLAGS = -DGMV_MathView_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/backend/common/tfm \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  $(T1_CFLAGS) \
+  $(NULL)
+
 libbackend_common_la_SOURCES = \
   Area.cc \
   AreaFactory.cc \
@@ -178,17 +188,6 @@ mathview_HEADERS = \
   $(MAYBE_TFM_H) \
   $(MAYBE_T1LIB_H) \
   $(MAYBE_BOXML_H) \
-  $(NULL)
-
-INCLUDES = \
-  -I$(top_builddir)/auto \
-  -I$(top_srcdir)/src/common \
-  -I$(top_srcdir)/src/common/mathvariants \
-  -I$(top_srcdir)/src/backend/common/tfm \
-  -I$(top_srcdir)/src/engine/common \
-  -I$(top_srcdir)/src/engine/mathml \
-  -I$(top_srcdir)/src/engine/boxml \
-  $(T1_CFLAGS) \
   $(NULL)
 
 libbackend_common_la_LIBADD = \

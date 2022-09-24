@@ -105,7 +105,7 @@ test_loading_reader_LDADD = \
   $(top_builddir)/src/widget/libgtkmathview_libxml2_reader.la \
   $(NULL)
 
-INCLUDES = \
+AM_CPPFLAGS = \
   -I$(top_builddir)/auto/ \
   -I$(top_srcdir)/src/common/ \
   -I$(top_srcdir)/src/common/mathvariants \

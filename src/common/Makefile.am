@@ -5,8 +5,12 @@ SUBDIRS = mathvariants
 
 noinst_LTLIBRARIES = libcommon.la
 
-libcommon_la_CPPFLAGS = $(NULL)
-libcommon_la_CPPFLAGS += -DGMV_MathView_DLL
+libcommon_la_CPPFLAGS = -DGMV_MathView_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/auto \
+  $(GLIB_CFLAGS) \
+  $(NULL)
+
 libcommon_la_LIBADD = \
   $(top_builddir)/src/common/mathvariants/libmathvariants.la \
   $(GLIB_LIBS) \
@@ -84,10 +88,3 @@ noinst_HEADERS = \
   for_each_if.h \
   token.hh \
   $(NULL)
-
-INCLUDES = \
-  -I$(top_builddir)/auto \
-  -I$(top_srcdir)/auto \
-  $(GLIB_CFLAGS) \
-  $(NULL)
-

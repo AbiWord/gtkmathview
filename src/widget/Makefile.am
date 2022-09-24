@@ -73,28 +73,7 @@ libgtkmathview_libxml2_reader_la_SOURCES = gtkmathview_libxml2_reader.cc
 libgtkmathview_libxml2_la_SOURCES = gtkmathview_libxml2.cc
 libgtkmathview_gmetadom_la_SOURCES = gtkmathview_gmetadom.cc
 
-libgtkmathview_custom_reader_la_CPPFLAGS = -DGMV_Widget_DLL
-libgtkmathview_libxml2_reader_la_CPPFLAGS = -DGMV_Widget_DLL
-libgtkmathview_libxml2_la_CPPFLAGS = -DGMV_Widget_DLL
-libgtkmathview_gmetadom_la_CPPFLAGS = -DGMV_Widget_DLL
-
-EXTRA_DIST = \
-  gtkmathview_common.cc \
-  gtkmathview_decorators_common.cc \
-  $(NULL)
-
-gtkdir = $(includedir)/$(PACKAGE)/gtk
-gtk_HEADERS = \
-  gtkmathview.h \
-  gtkmathview_decorators.h \
-  gtkmathview_common.h \
-  gtkmathview_decorators_common.h \
-  gtkmathview_custom_reader.h \
-  gtkmathview_libxml2_reader.h \
-  gtkmathview_libxml2.h \
-  gtkmathview_gmetadom.h
-
-INCLUDES = \
+libgtkmathview_custom_reader_la_CPPFLAGS = -DGMV_Widget_DLL \
   -I$(top_builddir)/auto \
   -I$(top_srcdir)/auto \
   -I$(top_srcdir)/src/common \
@@ -115,3 +94,82 @@ INCLUDES = \
   $(XML_CFLAGS) \
   $(NULL)
 
+libgtkmathview_libxml2_reader_la_CPPFLAGS = -DGMV_Widget_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/frontend/common \
+  -I$(top_srcdir)/src/frontend/custom_reader \
+  -I$(top_srcdir)/src/frontend/libxml2_reader \
+  -I$(top_srcdir)/src/frontend/libxml2 \
+  -I$(top_srcdir)/src/frontend/gmetadom \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  -I$(top_srcdir)/src/backend/common \
+  -I$(top_srcdir)/src/backend/gtk \
+  -I$(top_srcdir)/src/view \
+  $(GTK_CFLAGS) \
+  $(DOM_CFLAGS) \
+  $(XML_CFLAGS) \
+  $(NULL)
+
+libgtkmathview_libxml2_la_CPPFLAGS = -DGMV_Widget_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/frontend/common \
+  -I$(top_srcdir)/src/frontend/custom_reader \
+  -I$(top_srcdir)/src/frontend/libxml2_reader \
+  -I$(top_srcdir)/src/frontend/libxml2 \
+  -I$(top_srcdir)/src/frontend/gmetadom \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  -I$(top_srcdir)/src/backend/common \
+  -I$(top_srcdir)/src/backend/gtk \
+  -I$(top_srcdir)/src/view \
+  $(GTK_CFLAGS) \
+  $(DOM_CFLAGS) \
+  $(XML_CFLAGS) \
+  $(NULL)
+
+libgtkmathview_gmetadom_la_CPPFLAGS = -DGMV_Widget_DLL \
+  -I$(top_builddir)/auto \
+  -I$(top_srcdir)/auto \
+  -I$(top_srcdir)/src/common \
+  -I$(top_srcdir)/src/common/mathvariants \
+  -I$(top_srcdir)/src/frontend/common \
+  -I$(top_srcdir)/src/frontend/custom_reader \
+  -I$(top_srcdir)/src/frontend/libxml2_reader \
+  -I$(top_srcdir)/src/frontend/libxml2 \
+  -I$(top_srcdir)/src/frontend/gmetadom \
+  -I$(top_srcdir)/src/engine/common \
+  -I$(top_srcdir)/src/engine/mathml \
+  -I$(top_srcdir)/src/engine/boxml \
+  -I$(top_srcdir)/src/backend/common \
+  -I$(top_srcdir)/src/backend/gtk \
+  -I$(top_srcdir)/src/view \
+  $(GTK_CFLAGS) \
+  $(DOM_CFLAGS) \
+  $(XML_CFLAGS) \
+  $(NULL)
+
+
+EXTRA_DIST = \
+  gtkmathview_common.cc \
+  gtkmathview_decorators_common.cc \
+  $(NULL)
+
+gtkdir = $(includedir)/$(PACKAGE)/gtk
+gtk_HEADERS = \
+  gtkmathview.h \
+  gtkmathview_decorators.h \
+  gtkmathview_common.h \
+  gtkmathview_decorators_common.h \
+  gtkmathview_custom_reader.h \
+  gtkmathview_libxml2_reader.h \
+  gtkmathview_libxml2.h \
+  gtkmathview_gmetadom.h

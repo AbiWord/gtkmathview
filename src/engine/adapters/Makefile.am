@@ -3,18 +3,7 @@ NULL =
 
 noinst_LTLIBRARIES = libadapters.la
 
-libadapters_la_CPPFLAGS = -DGMV_MathView_DLL
-libadapters_la_SOURCES = \
-  BoxMLMathMLAdapter.cc \
-  MathMLBoxMLAdapter.cc \
-  $(NULL)
-
-noinst_HEADERS = \
-  BoxMLMathMLAdapter.hh \
-  MathMLBoxMLAdapter.hh \
-  $(NULL)
-
-INCLUDES = \
+libadapters_la_CPPFLAGS = -DGMV_MathView_DLL \
   -I$(top_builddir)/auto \
   -I$(top_srcdir)/src/common \
   -I$(top_srcdir)/src/common/mathvariants \
@@ -24,3 +13,12 @@ INCLUDES = \
   -I$(top_srcdir)/src/backend/common \
   $(NULL)
 
+libadapters_la_SOURCES = \
+  BoxMLMathMLAdapter.cc \
+  MathMLBoxMLAdapter.cc \
+  $(NULL)
+
+noinst_HEADERS = \
+  BoxMLMathMLAdapter.hh \
+  MathMLBoxMLAdapter.hh \
+  $(NULL)

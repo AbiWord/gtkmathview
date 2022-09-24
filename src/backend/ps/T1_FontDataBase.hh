@@ -19,7 +19,6 @@
 #ifndef __T1_FontDataBase_hh__
 #define __T1_FontDataBase_hh__
 
-#include <t1lib.h>
 #include <config.h>
 #include <map>
 #include <list>

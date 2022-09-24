@@ -18,6 +18,7 @@
 
 #include <config.h>
 
+#include <unistd.h>
 #include <cassert>
 #include <cstring>
 #include <fstream>

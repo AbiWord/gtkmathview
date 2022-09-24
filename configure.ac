@@ -452,7 +452,7 @@ if test "$enable_ps" = "yes"; then
 fi
 AM_CONDITIONAL([COND_PS], [test "$enable_ps" = "yes"])
 
-AM_BINRELOC
+dnl AM_BINRELOC
 AM_CONDITIONAL(WITH_BINRELOC, test "x$br_cv_binreloc" = "xyes")
 
 AC_MSG_CHECKING([whether to use GCC precompiled headers with $CXX])

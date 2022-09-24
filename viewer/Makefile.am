@@ -31,6 +31,7 @@ mathmlviewer_static_LDADD = \
   $(DOM_LIBS) \
   $(GTK_LIBS) \
   $(top_builddir)/src/widget/libgtkmathview_gmetadom.la \
+  $(top_builddir)/src/engine/boxml/libboxml.la \
   $(T1_LIBS) \
   $(T1_LIBS_X) \
   $(NULL)
@@ -88,6 +89,8 @@ test_rendering_LDADD = \
   $(T1_LIBS_X) \
   $(GLIB_LIBS) \
   $(top_builddir)/src/backend/gtk/libmathview_backend_gtk.la \
+  $(top_builddir)/src/libmathview.la \
+  $(top_builddir)/src/engine/boxml/libboxml.la \
   $(top_builddir)/src/view/libmathview_frontend_libxml2.la \
   $(NULL)
 

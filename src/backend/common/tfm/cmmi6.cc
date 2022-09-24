@@ -1,0 +1,605 @@
+// Copyright (C) 2000-2007, Luca Padovani <padovani@sti.uniurb.it>.
+// 
+// This file is part of GtkMathView, a flexible, high-quality rendering
+// engine for MathML documents.
+// 
+// GtkMathView is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Lesser General Public License as published
+// by the Free Software Foundation; either version 3 of the License, or
+// (at your option) any later version.
+// 
+// GtkMathView is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#include "TFM.hh"
+
+static TFM::Font font = {
+"CMMI",
+
+  0xf2,
+  "TeX math italic",
+  0x00600000,
+  0x10cdbece,
+  7,
+  128
+};
+
+static TFM::Dimension dimension[] = {
+  { 0x01, "slant", 0x00040000 },
+  { 0x02, "space", 0x00000000 },
+  { 0x03, "space_stretch", 0x00000000 },
+  { 0x04, "space_shrink", 0x00000000 },
+  { 0x05, "x_height", 0x0006e38d },
+  { 0x06, "quad", 0x001471c0 },
+  { 0x07, "extra_space", 0x00000000 }
+};
+
+
+static TFM::Kerning C_00_Kerning[] = {
+  { 0x3a, 0xfffded0b },
+  { 0x3b, 0xfffded0b },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_01_Kerning[] = {
+  { 0x7f, 0x00031c70 }
+};
+
+static TFM::Kerning C_02_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_03_Kerning[] = {
+  { 0x7f, 0x00031c70 }
+};
+
+static TFM::Kerning C_04_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_05_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_06_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_07_Kerning[] = {
+  { 0x3a, 0xfffded0b },
+  { 0x3b, 0xfffded0b },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_08_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_09_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_0a_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_0b_Kerning[] = {
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_0c_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_0e_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_0f_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_10_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_11_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_12_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_13_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_16_Kerning[] = {
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_17_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_18_Kerning[] = {
+  { 0x7f, 0x000212f5 }
+};
+
+static TFM::Kerning C_1a_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_1b_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 }
+};
+
+static TFM::Kerning C_1c_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_1d_Kerning[] = {
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_1e_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_1f_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_20_Kerning[] = {
+  { 0x7f, 0x000212f5 }
+};
+
+static TFM::Kerning C_22_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_23_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_25_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_26_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_27_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_3d_Kerning[] = {
+  { 0x01, 0xfffef685 },
+  { 0x41, 0xfffef685 },
+  { 0x4d, 0xfffef685 },
+  { 0x4e, 0xfffef685 },
+  { 0x59, 0x0001097b },
+  { 0x5a, 0xfffef685 }
+};
+
+static TFM::Kerning C_40_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_41_Kerning[] = {
+  { 0x7f, 0x000297b3 }
+};
+
+static TFM::Kerning C_42_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_43_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xffff7b43 },
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_44_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_45_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_46_Kerning[] = {
+  { 0x3a, 0xfffded0b },
+  { 0x3b, 0xfffded0b },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_47_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_48_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_49_Kerning[] = {
+  { 0x7f, 0x000212f5 }
+};
+
+static TFM::Kerning C_4a_Kerning[] = {
+  { 0x3a, 0xfffded0b },
+  { 0x3b, 0xfffded0b },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x00031c70 }
+};
+
+static TFM::Kerning C_4b_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_4c_Kerning[] = {
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_4d_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_4e_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xfffe71c8 },
+  { 0x3d, 0xffff7b43 },
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_4f_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_50_Kerning[] = {
+  { 0x3a, 0xfffded0b },
+  { 0x3b, 0xfffded0b },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_51_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_52_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_53_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_54_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xffff7b43 },
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_55_Kerning[] = {
+  { 0x3a, 0xfffded0b },
+  { 0x3b, 0xfffded0b },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_56_Kerning[] = {
+  { 0x3a, 0xfffce390 },
+  { 0x3b, 0xfffce390 },
+  { 0x3d, 0xfffded0b }
+};
+
+static TFM::Kerning C_57_Kerning[] = {
+  { 0x3a, 0xfffce390 },
+  { 0x3b, 0xfffce390 },
+  { 0x3d, 0xfffded0b }
+};
+
+static TFM::Kerning C_58_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xfffe71c8 },
+  { 0x3d, 0xffff7b43 },
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_59_Kerning[] = {
+  { 0x3a, 0xfffce390 },
+  { 0x3b, 0xfffce390 },
+  { 0x3d, 0xfffded0b }
+};
+
+static TFM::Kerning C_5a_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x3d, 0xfffef685 },
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_60_Kerning[] = {
+  { 0x7f, 0x000212f5 }
+};
+
+static TFM::Kerning C_63_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_64_Kerning[] = {
+  { 0x59, 0x0001097b },
+  { 0x5a, 0xfffef685 },
+  { 0x66, 0xfffce390 },
+  { 0x6a, 0xfffded0b },
+  { 0x7f, 0x00031c70 }
+};
+
+static TFM::Kerning C_65_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_66_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x7f, 0x00031c70 }
+};
+
+static TFM::Kerning C_67_Kerning[] = {
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_68_Kerning[] = {
+  { 0x7f, 0xffff7b43 }
+};
+
+static TFM::Kerning C_6a_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 }
+};
+
+static TFM::Kerning C_6c_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_6f_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_70_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_71_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_72_Kerning[] = {
+  { 0x3a, 0xfffef685 },
+  { 0x3b, 0xfffef685 },
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_73_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_74_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_75_Kerning[] = {
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_76_Kerning[] = {
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_77_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_78_Kerning[] = {
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_79_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_7a_Kerning[] = {
+  { 0x7f, 0x0001097b }
+};
+
+static TFM::Kerning C_7b_Kerning[] = {
+  { 0x7f, 0x000084bd }
+};
+
+static TFM::Kerning C_7c_Kerning[] = {
+  { 0x7f, 0x00018e38 }
+};
+
+static TFM::Kerning C_7d_Kerning[] = {
+  { 0x7f, 0x000212f5 }
+};
+
+
+static TFM::Character character[] = {
+  { 0x00, 0x000be1a5, 0x000aeef0, 0x00000000, 0x0000db05, 4, C_00_Kerning, 0, 0 },
+  { 0x01, 0x001071c0, 0x000aeef0, 0x00000000, 0x00000000, 1, C_01_Kerning, 0, 0 },
+  { 0x02, 0x000ef1f0, 0x000aeef0, 0x00000000, 0x000084bd, 1, C_02_Kerning, 0, 0 },
+  { 0x03, 0x000dbf80, 0x000aeef0, 0x00000000, 0x00000000, 1, C_03_Kerning, 0, 0 },
+  { 0x04, 0x000e84bb, 0x000aeef0, 0x00000000, 0x00006e38, 1, C_04_Kerning, 0, 0 },
+  { 0x05, 0x000ffe15, 0x000aeef0, 0x00000000, 0x000084bd, 4, C_05_Kerning, 0, 0 },
+  { 0x06, 0x000f39d3, 0x000aeef0, 0x00000000, 0x0000db05, 1, C_06_Kerning, 0, 0 },
+  { 0x07, 0x000bc718, 0x000aeef0, 0x00000000, 0x0000db05, 4, C_07_Kerning, 0, 0 },
+  { 0x08, 0x000d5550, 0x000aeef0, 0x00000000, 0x00000000, 1, C_08_Kerning, 0, 0 },
+  { 0x09, 0x000c7fc8, 0x000aeef0, 0x00000000, 0x0000d27b, 4, C_09_Kerning, 0, 0 },
+  { 0x0a, 0x000f22d3, 0x000aeef0, 0x00000000, 0x0000c408, 1, C_0a_Kerning, 0, 0 },
+  { 0x0b, 0x000cdf48, 0x0006e38d, 0x00000000, 0x00000000, 1, C_0b_Kerning, 0, 0 },
+  { 0x0c, 0x000b2b25, 0x000b1c73, 0x00031c73, 0x0000d27b, 1, C_0c_Kerning, 0, 0 },
+  { 0x0d, 0x000a6e88, 0x0006e38d, 0x00031c73, 0x00000000, 0, 0, 0, 0 },
+  { 0x0e, 0x00090f2b, 0x000b1c73, 0x00000000, 0x00008dc0, 3, C_0e_Kerning, 0, 0 },
+  { 0x0f, 0x00085f48, 0x0006e38d, 0x00000000, 0x00000000, 1, C_0f_Kerning, 0, 0 },
+  { 0x10, 0x000925eb, 0x000b1c73, 0x00031c73, 0x0000f558, 1, C_10_Kerning, 0, 0 },
+  { 0x11, 0x000a4dbb, 0x0006e38d, 0x00031c73, 0x000092f8, 1, C_11_Kerning, 0, 0 },
+  { 0x12, 0x000971cb, 0x000b1c73, 0x00000000, 0x000084bd, 1, C_12_Kerning, 0, 0 },
+  { 0x13, 0x00077685, 0x0006e38d, 0x00000000, 0x00000000, 1, C_13_Kerning, 0, 0 },
+  { 0x14, 0x000b9c70, 0x0006e38d, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x15, 0x000bc718, 0x000b1c73, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x16, 0x000c0000, 0x0006e38d, 0x00031c73, 0x00000000, 1, C_16_Kerning, 0, 0 },
+  { 0x17, 0x0009f1c3, 0x0006e38d, 0x00000000, 0x00000f0d, 3, C_17_Kerning, 0, 0 },
+  { 0x18, 0x000925eb, 0x000b1c73, 0x00031c73, 0x0000709b, 1, C_18_Kerning, 0, 0 },
+  { 0x19, 0x000ba0b0, 0x0006e38d, 0x00000000, 0x000092f8, 0, 0, 0, 0 },
+  { 0x1a, 0x000a3960, 0x0006e38d, 0x00031c73, 0x00000000, 1, C_1a_Kerning, 0, 0 },
+  { 0x1b, 0x000b76fb, 0x0006e38d, 0x00000000, 0x000092f8, 2, C_1b_Kerning, 0, 0 },
+  { 0x1c, 0x0009501b, 0x0006e38d, 0x00000000, 0x0000c408, 3, C_1c_Kerning, 0, 0 },
+  { 0x1d, 0x000b0978, 0x0006e38d, 0x00000000, 0x000092f5, 1, C_1d_Kerning, 0, 0 },
+  { 0x1e, 0x000bdfc3, 0x000b1c73, 0x00031c73, 0x00000000, 1, C_1e_Kerning, 0, 0 },
+  { 0x1f, 0x000c4718, 0x0006e38d, 0x00031c73, 0x00000000, 1, C_1f_Kerning, 0, 0 },
+  { 0x20, 0x000d1c6d, 0x000b1c73, 0x00031c73, 0x000092f5, 1, C_20_Kerning, 0, 0 },
+  { 0x21, 0x000c7a4b, 0x0006e38d, 0x00000000, 0x000092f5, 0, 0, 0, 0 },
+  { 0x22, 0x00096310, 0x0006e38d, 0x00000000, 0x00000000, 1, C_22_Kerning, 0, 0 },
+  { 0x23, 0x000c02d5, 0x000b1c73, 0x00000000, 0x00000000, 1, C_23_Kerning, 0, 0 },
+  { 0x24, 0x00105993, 0x0006e38d, 0x00000000, 0x000084bd, 0, 0, 0, 0 },
+  { 0x25, 0x000a3960, 0x0006e38d, 0x00031c73, 0x00000000, 1, C_25_Kerning, 0, 0 },
+  { 0x26, 0x0007ce35, 0x0006e38d, 0x00018e3b, 0x0000709b, 1, C_26_Kerning, 0, 0 },
+  { 0x27, 0x000cfc30, 0x0006e38d, 0x00031c73, 0x00000000, 1, C_27_Kerning, 0, 0 },
+  { 0x28, 0x00138e30, 0x00063d28, 0xfffe3d28, 0x00000000, 0, 0, 0, 0 },
+  { 0x29, 0x00138e30, 0x00063d28, 0xfffe3d28, 0x00000000, 0, 0, 0, 0 },
+  { 0x2a, 0x00138e30, 0x00063d28, 0xfffe3d28, 0x00000000, 0, 0, 0, 0 },
+  { 0x2b, 0x00138e30, 0x00063d28, 0xfffe3d28, 0x00000000, 0, 0, 0, 0 },
+  { 0x2c, 0x000612f5, 0x00081080, 0x00001080, 0x00000000, 0, 0, 0, 0 },
+  { 0x2d, 0x000612f5, 0x00081080, 0x00001080, 0x00000000, 0, 0, 0, 0 },
+  { 0x2e, 0x000a38e0, 0x000771c8, 0xffff71c8, 0x00000000, 0, 0, 0, 0 },
+  { 0x2f, 0x000a38e0, 0x000771c8, 0xffff71c8, 0x00000000, 0, 0, 0, 0 },
+  { 0x30, 0x000a38e0, 0x0006e38d, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x31, 0x000a38e0, 0x0006e38d, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x32, 0x000a38e0, 0x0006e38d, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x33, 0x000a38e0, 0x0006e38d, 0x00031c73, 0x00000000, 0, 0, 0, 0 },
+  { 0x34, 0x000a38e0, 0x0006e38d, 0x00031c73, 0x00000000, 0, 0, 0, 0 },
+  { 0x35, 0x000a38e0, 0x0006e38d, 0x00031c73, 0x00000000, 0, 0, 0, 0 },
+  { 0x36, 0x000a38e0, 0x000a4fa5, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x37, 0x000a38e0, 0x0006e38d, 0x00031c73, 0x00000000, 0, 0, 0, 0 },
+  { 0x38, 0x000a38e0, 0x000a4fa5, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x39, 0x000a38e0, 0x0006e38d, 0x00031c73, 0x00000000, 0, 0, 0, 0 },
+  { 0x3a, 0x000612f5, 0x0001ed0b, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x3b, 0x000612f5, 0x0001ed0b, 0x00031c73, 0x00000000, 0, 0, 0, 0 },
+  { 0x3c, 0x000f6845, 0x00096865, 0x00016865, 0x00000000, 0, 0, 0, 0 },
+  { 0x3d, 0x000a38e0, 0x000c0000, 0x00040000, 0x00000000, 6, C_3d_Kerning, 0, 0 },
+  { 0x3e, 0x000f6845, 0x00096865, 0x00016865, 0x00000000, 0, 0, 0, 0 },
+  { 0x3f, 0x000a38e0, 0x000771c8, 0xffff71c8, 0x00000000, 0, 0, 0, 0 },
+  { 0x40, 0x000a89f5, 0x000b1c73, 0x00000000, 0x00000000, 1, C_40_Kerning, 0, 0 },
+  { 0x41, 0x000ec8fb, 0x000aeef0, 0x00000000, 0x00000000, 1, C_41_Kerning, 0, 0 },
+  { 0x42, 0x000ed32d, 0x000aeef0, 0x00000000, 0x0000c408, 1, C_42_Kerning, 0, 0 },
+  { 0x43, 0x000e23a0, 0x000aeef0, 0x00000000, 0x00005553, 4, C_43_Kerning, 0, 0 },
+  { 0x44, 0x000ff8f5, 0x000aeef0, 0x00000000, 0x000084bd, 1, C_44_Kerning, 0, 0 },
+  { 0x45, 0x000e6570, 0x000aeef0, 0x00000000, 0x0000db05, 1, C_45_Kerning, 0, 0 },
+  { 0x46, 0x000c6663, 0x000aeef0, 0x00000000, 0x0000db05, 4, C_46_Kerning, 0, 0 },
+  { 0x47, 0x000f3f20, 0x000aeef0, 0x00000000, 0x00000000, 1, C_47_Kerning, 0, 0 },
+  { 0x48, 0x000ffe15, 0x000aeef0, 0x00000000, 0x000084bd, 4, C_48_Kerning, 0, 0 },
+  { 0x49, 0x0008c350, 0x000aeef0, 0x00000000, 0x00008dc0, 1, C_49_Kerning, 0, 0 },
+  { 0x4a, 0x000ae7d3, 0x000aeef0, 0x00000000, 0x000092f5, 4, C_4a_Kerning, 0, 0 },
+  { 0x4b, 0x00106938, 0x000aeef0, 0x00000000, 0x00005553, 4, C_4b_Kerning, 0, 0 },
+  { 0x4c, 0x000d8a68, 0x000aeef0, 0x00000000, 0x00000000, 1, C_4c_Kerning, 0, 0 },
+  { 0x4d, 0x001295c8, 0x000aeef0, 0x00000000, 0x000092f8, 4, C_4d_Kerning, 0, 0 },
+  { 0x4e, 0x000f7958, 0x000aeef0, 0x00000000, 0x000092f8, 5, C_4e_Kerning, 0, 0 },
+  { 0x4f, 0x000ef1f0, 0x000aeef0, 0x00000000, 0x000084bd, 1, C_4f_Kerning, 0, 0 },
+  { 0x50, 0x000c7ac5, 0x000aeef0, 0x00000000, 0x0000db05, 4, C_50_Kerning, 0, 0 },
+  { 0x51, 0x000f76ad, 0x000aeef0, 0x00031c73, 0x00000000, 1, C_51_Kerning, 0, 0 },
+  { 0x52, 0x000ec10b, 0x000aeef0, 0x00000000, 0x00000f0d, 1, C_52_Kerning, 0, 0 },
+  { 0x53, 0x000c1b7d, 0x000aeef0, 0x00000000, 0x0000d920, 4, C_53_Kerning, 0, 0 },
+  { 0x54, 0x000bb2b5, 0x000aeef0, 0x00000000, 0x0000db05, 4, C_54_Kerning, 0, 0 },
+  { 0x55, 0x000d68d8, 0x000aeef0, 0x00000000, 0x000092f8, 4, C_55_Kerning, 0, 0 },
+  { 0x56, 0x000bac8d, 0x000aeef0, 0x00000000, 0x0000ed8d, 3, C_56_Kerning, 0, 0 },
+  { 0x57, 0x00126a2b, 0x000aeef0, 0x00000000, 0x0000db05, 3, C_57_Kerning, 0, 0 },
+  { 0x58, 0x001005ab, 0x000aeef0, 0x00000000, 0x00008dc0, 5, C_58_Kerning, 0, 0 },
+  { 0x59, 0x000b9f45, 0x000aeef0, 0x00000000, 0x0000ed8d, 3, C_59_Kerning, 0, 0 },
+  { 0x5a, 0x000d6755, 0x000aeef0, 0x00000000, 0x00005553, 4, C_5a_Kerning, 0, 0 },
+  { 0x5b, 0x000825eb, 0x000c0000, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x5c, 0x000825eb, 0x000b1c73, 0x00031c73, 0x00000000, 0, 0, 0, 0 },
+  { 0x5d, 0x000825eb, 0x000b1c73, 0x00031c73, 0x00000000, 0, 0, 0, 0 },
+  { 0x5e, 0x00138e30, 0x0005b8e5, 0xfffdb8e5, 0x00000000, 0, 0, 0, 0 },
+  { 0x5f, 0x00138e30, 0x0005b8e5, 0xfffdb8e5, 0x00000000, 0, 0, 0, 0 },
+  { 0x60, 0x00084bdb, 0x000b1c73, 0x00000000, 0x00000000, 1, C_60_Kerning, 0, 0 },
+  { 0x61, 0x000acc53, 0x0006e38d, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x62, 0x0008c353, 0x000b1c73, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x63, 0x0008f240, 0x0006e38d, 0x00000000, 0x00000000, 1, C_63_Kerning, 0, 0 },
+  { 0x64, 0x000a4795, 0x000b1c73, 0x00000000, 0x00000000, 5, C_64_Kerning, 0, 0 },
+  { 0x65, 0x00096c90, 0x0006e38d, 0x00000000, 0x00000000, 1, C_65_Kerning, 0, 0 },
+  { 0x66, 0x00099c70, 0x000b1c73, 0x00031c73, 0x0000a12d, 3, C_66_Kerning, 0, 0 },
+  { 0x67, 0x0009b955, 0x0006e38d, 0x00031c73, 0x000092f8, 1, C_67_Kerning, 0, 0 },
+  { 0x68, 0x000b9c70, 0x000b1c73, 0x00000000, 0x00000000, 1, C_68_Kerning, 0, 0 },
+  { 0x69, 0x00072130, 0x000a99bd, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x6a, 0x00082f68, 0x000a99bd, 0x00031c73, 0x0000ed8d, 2, C_6a_Kerning, 0, 0 },
+  { 0x6b, 0x000a92f5, 0x000b1c73, 0x00000000, 0x00005553, 0, 0, 0, 0 },
+  { 0x6c, 0x00066d0b, 0x000b1c73, 0x00000000, 0x00000000, 1, C_6c_Kerning, 0, 0 },
+  { 0x6d, 0x00117ffb, 0x0006e38d, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x6e, 0x000c5095, 0x0006e38d, 0x00000000, 0x00000000, 0, 0, 0, 0 },
+  { 0x6f, 0x0009cccd, 0x0006e38d, 0x00000000, 0x00000000, 1, C_6f_Kerning, 0, 0 },
+  { 0x70, 0x000a4795, 0x0006e38d, 0x00031c73, 0x00000000, 1, C_70_Kerning, 0, 0 },
+  { 0x71, 0x000921a5, 0x0006e38d, 0x00031c73, 0x000092f8, 1, C_71_Kerning, 0, 0 },
+  { 0x72, 0x0009471b, 0x0006e38d, 0x00000000, 0x000084bd, 3, C_72_Kerning, 0, 0 },
+  { 0x73, 0x00095a13, 0x0006e38d, 0x00000000, 0x00000000, 1, C_73_Kerning, 0, 0 },
+  { 0x74, 0x0007a12d, 0x0009d75d, 0x00000000, 0x00000000, 1, C_74_Kerning, 0, 0 },
+  { 0x75, 0x000bcbd8, 0x0006e38d, 0x00000000, 0x00000000, 1, C_75_Kerning, 0, 0 },
+  { 0x76, 0x0009fffd, 0x0006e38d, 0x00000000, 0x000092f5, 1, C_76_Kerning, 0, 0 },
+  { 0x77, 0x000e4aa5, 0x0006e38d, 0x00000000, 0x00006e38, 1, C_77_Kerning, 0, 0 },
+  { 0x78, 0x000b2aa8, 0x0006e38d, 0x00000000, 0x00000000, 1, C_78_Kerning, 0, 0 },
+  { 0x79, 0x000a212b, 0x0006e38d, 0x00031c73, 0x000092f8, 1, C_79_Kerning, 0, 0 },
+  { 0x7a, 0x0009897b, 0x0006e38d, 0x00000000, 0x0000a12d, 1, C_7a_Kerning, 0, 0 },
+  { 0x7b, 0x00072130, 0x0006e38d, 0x00000000, 0x00000000, 1, C_7b_Kerning, 0, 0 },
+  { 0x7c, 0x0007aaab, 0x0006e38d, 0x00031c73, 0x00000000, 1, C_7c_Kerning, 0, 0 },
+  { 0x7d, 0x000c982b, 0x0006e38d, 0x00031c73, 0x00000000, 1, C_7d_Kerning, 0, 0 },
+  { 0x7e, 0x000a38e0, 0x000b8643, 0x00000000, 0x0000d920, 0, 0, 0, 0 },
+  { 0x7f, 0x000612f5, 0x000b1c73, 0x00000000, 0x0000f558, 0, 0, 0, 0 }
+};
+
+void
+cmmi6_tables(TFM::Font*& _font, TFM::Dimension*& _dimension, TFM::Character*& _character)
+{
+  _font = &font;
+  _dimension = dimension;
+  _character = character;
+}

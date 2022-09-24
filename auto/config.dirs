@@ -1,0 +1,2 @@
+#define PKGDATADIR "/usr/local/share/gtkmathview"
+#define PKGSYSCONFDIR "/usr/local/etc/gtkmathview"
